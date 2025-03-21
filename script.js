@@ -169,4 +169,4 @@ function generateTable(data) {
     tableHTML += `</table>`;
     return tableHTML;
 }
-//done
+
