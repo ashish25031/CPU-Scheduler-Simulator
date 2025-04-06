@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CPU Scheduler Simulator</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <div class="image-container">
+    <img src="image/icons8-task-48.png" alt="CPU" class="neon-image">
+</div>
 </head>
 <body class="flex flex-col items-center p-6 min-h-screen">
 
@@ -61,7 +64,7 @@
   <div id="ganttChart" class="flex flex-wrap gap-2 justify-center mb-6"></div>
 
   <button onclick="downloadCSV()" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-6 rounded mb-6 hidden" id="downloadBtn">
-    Download CSV
+    Download Results
   </button>
 
   <div id="toast" class="hidden fixed bottom-5 right-5 bg-green-500 text-black px-4 py-2 rounded shadow-lg">
