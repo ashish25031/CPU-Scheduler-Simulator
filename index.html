@@ -1,49 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-gray-900 text-white">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CPU Scheduler Simulator</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CPU Scheduler Simulator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="flex flex-col items-center p-6 min-h-screen">
 
-    <!-- Neon Header with Image -->
-    <div class="image-container">
-        <img src="image/icons8-task-48.png" alt="CPU" class="neon-image">
-        <h1>CPU Scheduler Simulator</h1>
-    </div>
+  <h1 class="text-4xl font-bold neon-text mb-6">CPU Scheduler Simulator</h1>
 
-    <!-- Main Content -->
-    <div class="container">
-        <label for="algorithm">Choose Algorithm:</label>
-        <select id="algorithm">
-            <option value="FCFS">FCFS</option>
-            <option value="SJF">SJF</option>
-            <option value="RoundRobin">Round Robin</option>
-        </select>
+  <div class="flex flex-col md:flex-row gap-4 items-center mb-4">
+    <select id="algorithm" class="p-2 rounded bg-gray-800 text-white">
+      <option value="FCFS">FCFS</option>
+      <option value="SJF">SJF</option>
+      <option value="RoundRobin">Round Robin</option>
+    </select>
 
-        <div id="quantumInput" style="display: none;">
-            <label for="quantum">Time Quantum:</label>
-            <input type="number" id="quantum" min="1">
-        </div>
+    <input type="number" id="quantum" placeholder="Time Quantum" class="p-2 rounded bg-gray-800 text-white hidden" />
 
-        <table id="processTable">
-            <tr>
-                <th>Process ID</th>
-                <th>Arrival Time</th>
-                <th>Burst Time</th>
-            </tr>
-        </table>
-        <button onclick="addProcess()">Add Process</button>
-        <button onclick="runSimulation()">Run Simulation</button>
+    <button onclick="addProcess()" class="bg-green-500 hover:bg-green-600 text-black font-bold py-2 px-4 rounded">
+      Add Process
+    </button>
 
-        <!-- Results Section -->
-        <h2>Results</h2>
-        <div id="loading" class="loader" style="display: none;"></div>
-        <pre id="output"></pre>
-    </div>
+    <button onclick="resetProcesses()" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
+      Reset
+    </button>
 
-    <script src="script.js"> </script>
+    <button onclick="toggleTheme()" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+      Toggle Theme
+    </button>
+  </div>
+
+  <table id="processTable" class="table-auto mb-6 w-full max-w-4xl text-center border">
+    <thead class="bg-gray-700">
+      <tr>
+        <th class="p-2">PID</th>
+        <th class="p-2">Arrival Time</th>
+        <th class="p-2">Burst Time</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <button onclick="runSimulation()" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-6 rounded mb-6">
+    Run Simulation
+  </button>
+
+  <div id="loading" class="hidden text-center mb-6">
+    <div class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-16 w-16 mb-4 animate-spin"></div>
+    <p>Simulating...</p>
+  </div>
+
+  <div id="output" class="w-full max-w-5xl mb-6 hidden"></div>
+
+  <div id="timeTaken" class="text-center text-green-400 text-lg font-semibold mb-6 hidden"></div>
+
+  <div id="averageTimes" class="text-center text-xl font-bold mb-6 hidden"></div>
+
+  <div id="ganttChart" class="flex flex-wrap gap-2 justify-center mb-6"></div>
+
+  <button onclick="downloadCSV()" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-6 rounded mb-6 hidden" id="downloadBtn">
+    Download CSV
+  </button>
+
+  <div id="toast" class="hidden fixed bottom-5 right-5 bg-green-500 text-black px-4 py-2 rounded shadow-lg">
+    Simulation Completed 🎉
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
